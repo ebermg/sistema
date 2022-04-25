@@ -1,9 +1,8 @@
-from msilib.schema import ListView
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from .models import Libro
-from django.views.generic import ListView
+from .forms import LibroForm
 
 # Create your views here.
 #Acceso del sitio
@@ -17,11 +16,27 @@ def libros(request):
     libros = Libro.objects.all()
     return render(request, 'libros/index.html', {'libros': libros})
 
+#éste está mal 
 def crear(request):
+    formulario = LibroForm(request.POST or None, request.FILES or None)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('libros')
     return render(request, 'libros/crear.html')
 
-def editar(request):
-    return render(request, 'libros/editar.html')
+#este tambien esta mal :(
+def editar(request, id):
+    libro = Libro.objects.get(id=id)
+    formulario = LibroForm(request.POST or None, request.FILES or None, instance=libro)
+    if formulario.is_valid() and request.POST: #otra forma de usar el post es ---->  request.method == 'POST'
+        formulario.save()
+        return redirect('libros')
+    return render(request, 'libros/editar.html', {'formulario':formulario})
+
+def eliminar(request, id):
+    libro = Libro.objects.get(id=id)
+    libro.delete()
+    return redirect('libros')
 
 # class indexLibreria(ListView):
 #     template_name = 'libros/index.html'
