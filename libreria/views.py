@@ -1,6 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-
 from .models import Libro
 from .forms import LibroForm
 
@@ -18,11 +16,11 @@ def libros(request):
 
 #éste está mal 
 def crear(request):
-    formulario = LibroForm(request.POST or None, request.FILES or None)
-    if formulario.is_valid():
-        formulario.save()
-        return redirect('libros')
-    return render(request, 'libros/crear.html')
+    formulario = LibroForm(request.POST or None)
+    # if formulario.is_valid():
+    #     formulario.save()
+    #     return redirect('libros')
+    return render(request, 'libros/crear.html',{'formulario':formulario})
 
 #este tambien esta mal :(
 def editar(request, id):
