@@ -17,9 +17,6 @@ def libros(request):
 #éste está mal 
 def crear(request):
     formulario = LibroForm(request.POST or None)
-    # if formulario.is_valid():
-    #     formulario.save()
-    #     return redirect('libros')
     return render(request, 'libros/crear.html',{'formulario':formulario})
 
 #este tambien esta mal :(
