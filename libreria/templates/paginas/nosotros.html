@@ -1,9 +1,31 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block titulo %} Nosotros {% endblock %}
 
 {% block contenido %}  
 
-Seccion Nosotros
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-sm-4">
+        <h2>Acerca de nosotros</h2>
+        <h5>Somos la mejor librería</h5>
+        <div class="fakeimg">Libros de historia</div>
+        <h3 class="mt-4">Siguenos</h3>
+        <p>La literatura que necesites la tenemos.</p>
+
+        <img src="{% static 'img/nos.svg' %}" width="200">
+        
+        <hr class="d-sm-none">
+      </div>
+      <div class="col-sm-8">
+        <h2>Libreria</h2>
+        <h5>La librería de la región</h5>
+        <p>La librería mas completa para apoyar a la educación con el mejor contenido textual para la comunidad estudiantil.</p>
+        <img src="{% static 'img/nosotros.svg' %}" class="img-fluid|thumbnail rounded-top|rounded-end|rounded-bottom|rounded-start|rounded-circle|" alt="">
+      </div>
+    </div>
+  </div>
 
 {% endblock %}

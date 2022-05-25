@@ -16,7 +16,10 @@ def libros(request):
 
 #éste está mal 
 def crear(request):
-    formulario = LibroForm(request.POST or None)
+    formulario = LibroForm(request.POST or None, request.FILES or None)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('libros')
     return render(request, 'libros/crear.html',{'formulario':formulario})
 
 #este tambien esta mal :(
@@ -33,9 +36,3 @@ def eliminar(request, id):
     libro.delete()
     return redirect('libros')
 
-# class indexLibreria(ListView):
-#     template_name = 'libros/index.html'
-#     context_object_name = 'listar_libro'
-    
-#     def get_queryset(self):
-#         return Libro.objects.all()
